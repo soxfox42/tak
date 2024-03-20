@@ -1,3 +1,5 @@
+! from https://concatenative.org/wiki/view/Tak%20function
+
 USING:
     combinators.extras command-line generalizations
     kernel math math.parser namespaces prettyprint

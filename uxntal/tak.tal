@@ -1,3 +1,5 @@
+( from https://concatenative.org/wiki/view/Tak%20function )
+
 @on-reset ( -> )
     ;on-console #10 DEO2 
     #00
