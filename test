@@ -1,5 +1,0 @@
-#!/bin/bash
-printf "C      "; ./run c $1 $2 $3
-printf "LuaJIT "; ./run luajit $1 $2 $3
-printf "Python "; ./run python $1 $2 $3
-printf "Factor "; ./run factor $1 $2 $3
