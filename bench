@@ -1,0 +1,39 @@
+#!/usr/bin/python3
+
+from datetime import datetime
+import datetime as dt
+from operator import itemgetter
+from pathlib import Path
+import subprocess
+
+x, y, z = "48", "20", "12"
+runs = 4
+
+results = []
+
+for path in Path.cwd().iterdir():
+    if not path.is_dir():
+        continue
+
+    name = path.name
+    build = path / "build.sh"
+    run = path / "run.sh"
+
+    if not run.exists(): continue
+    print(f"Running {name}")
+
+    if build.exists():
+        subprocess.run(build, cwd=path, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    total = dt.timedelta()
+    for i in range(runs):
+        start = datetime.now()
+        subprocess.run([run, x, y, z], cwd=path, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        end = datetime.now()
+        total += end - start
+    results.append((path.name, total / runs))
+
+results.sort(key=itemgetter(1))
+
+for name, time in results:
+    print(f"{name:15} | {time}")

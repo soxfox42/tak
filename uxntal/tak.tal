@@ -1,0 +1,24 @@
+@on-reset ( -> )
+    ;on-console #10 DEO2 
+    #00
+    ( #0a #14 #1e tak )
+    ( #010e DEO )
+    BRK
+
+@on-console ( -> )
+    #17 DEI
+    #02 NEQk ?{
+        POP2 #0a MUL #12 DEI #30 SUB ADD BRK
+    }
+    INC NEQk ?{ NEQ BRK }
+    POP2 tak
+    #010e DEO #800f DEO
+    BRK
+
+@tak ( z y x -- res )
+    LTHk ?{ POP2 JMP2r }
+    ROT ROTk ROTk
+    ( x-1 ) #01 SUB tak STH
+    ( y-1 ) #01 SUB tak STH
+    ( z-1 ) #01 SUB tak STHr STHr !tak
+
