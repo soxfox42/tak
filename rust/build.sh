@@ -1,2 +1,2 @@
 #!/bin/bash
-rustc tak.rs
+rustc -Copt-level=3 tak.rs
