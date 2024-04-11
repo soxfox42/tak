@@ -26,6 +26,8 @@ lua             | 0:00:17.558004
 python          | 0:00:33.063282
 ```
 
+Note that Factor does not currently support arm64 processors, so it is running through Rosetta 2 translation in this run.
+
 ## PRs Welcome!
 
 I'd love to build up a collection of more languages, and while I plan to implement some more myself, I won't say no to help!
