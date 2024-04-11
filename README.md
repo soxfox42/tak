@@ -17,6 +17,7 @@ def tak(x, y, z):
 
 Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
 ```
+rust            | 0:00:00.973172
 c               | 0:00:01.007381
 luajit          | 0:00:03.208017
 factor          | 0:00:06.010207
