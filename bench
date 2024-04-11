@@ -21,7 +21,7 @@ parser.add_argument(
 )
 parser.add_argument(
     "-i", "--impl",
-    action="append",
+    action="append", default=[],
     help="The implementations to run",
 )
 args = parser.parse_args()
