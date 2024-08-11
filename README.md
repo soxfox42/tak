@@ -19,6 +19,7 @@ Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
 ```
 rust            | 0:00:00.973172
 c               | 0:00:01.007381
+haskell         | 0:00:02.896498
 luajit          | 0:00:03.208017
 factor          | 0:00:06.010207
 gforth          | 0:00:13.519273
