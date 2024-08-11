@@ -2,5 +2,6 @@ c/tak
 haskell/tak
 haskell/tak.hi
 haskell/tak.o
-uxntal/tak.rom*
+java/Tak.class
 rust/tak
+uxntal/tak.rom*
