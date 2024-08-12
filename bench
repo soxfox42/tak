@@ -24,7 +24,16 @@ parser.add_argument(
     action="append", default=[],
     help="The implementations to run",
 )
+parser.add_argument(
+    "-a", "--all",
+    action="store_true",
+    help="Run all implementations, including skipped-by-default ones",
+)
 args = parser.parse_args()
+
+skip_default = [
+    "callisto", # Harder to set up, requires building compiler and installing stdlib
+]
 
 for impl in args.impl:
     path = Path.cwd() / impl
@@ -42,7 +51,10 @@ for path in Path.cwd().iterdir():
     run = path / "run.sh"
 
     if not run.exists(): continue
+    # If implementations were explicitly specified, only run those.
     if args.impl and name not in args.impl: continue
+    # If -a was not specified, skip trickier implementations
+    if not args.impl and not args.all and name in skip_default: continue
     print(f"Running {name}")
 
     if build.exists():

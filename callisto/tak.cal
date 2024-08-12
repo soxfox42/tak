@@ -1,0 +1,34 @@
+include "cores/select.cal"
+include "std/args.cal"
+include "std/conv.cal"
+include "std/io.cal"
+
+func tak begin
+	let cell x
+	let cell y
+	let cell z
+	-> z
+	-> y
+	-> x
+
+	if y x < then
+		x 1 - y z tak
+		y 1 - z x tak
+		z 1 - x y tak
+		tak return
+	else
+		z return
+	end
+end
+
+if get_args_length 4 < then
+	1 exit
+end
+
+let Array arg
+
+1 &arg get_arg &arg parse_int
+2 &arg get_arg &arg parse_int
+3 &arg get_arg &arg parse_int
+
+tak printdec 10 printch
