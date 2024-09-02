@@ -7,3 +7,5 @@ haskell/tak.o
 java/Tak.class
 rust/tak
 uxntal/tak.rom*
+dlang/tak
+dlang/tak.o
