@@ -71,4 +71,5 @@ for path in Path.cwd().iterdir():
 results.sort(key=itemgetter(1))
 
 for name, time in results:
-    print(f"{name:15} | {time}")
+    trimmed = str(time).split(":", 1)[1]
+    print(f"{name:11} | {trimmed}")

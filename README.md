@@ -17,23 +17,22 @@ def tak(x, y, z):
 
 Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
 ```
-rust            | 0:00:00.977790
-c               | 0:00:00.986693
-java            | 0:00:00.989793
-go              | 0:00:01.130203
-luajit          | 0:00:03.021330
-haskell         | 0:00:03.171809
-callisto        | 0:00:05.388037
-factor          | 0:00:05.856998
-gforth          | 0:00:13.295513
-uxntal          | 0:00:16.159653
-lua             | 0:00:16.524570
-python          | 0:00:32.228501
+rust        | 00:00.977790
+c           | 00:00.986693
+java        | 00:00.989793
+go          | 00:01.130203
+dlang       | 00:01.387809
+luajit      | 00:03.021330
+haskell     | 00:03.171809
+callisto    | 00:05.401088
+factor      | 00:05.856998
+gforth      | 00:13.295513
+uxntal      | 00:16.159653
+lua         | 00:16.524570
+python      | 00:32.228501
 ```
 
-Note that the following languages were run via Rosetta 2 translation:
-- Callisto
-- Factor
+Note that the Factor implementation was run via Rosetta 2 translation.
 
 ## PRs Welcome!
 
