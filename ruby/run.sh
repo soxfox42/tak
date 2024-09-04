@@ -1,2 +1,2 @@
 #!/bin/bash
-ruby tak.py $1 $2 $3
+ruby tak.rb $1 $2 $3
