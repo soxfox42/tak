@@ -1,5 +1,10 @@
 c/tak
 callisto/tak
+cython/build
+cython/tak.c
+cython/tak.cpython*
+dlang/tak
+dlang/tak.o
 go/tak
 haskell/tak
 haskell/tak.hi
@@ -7,5 +12,3 @@ haskell/tak.o
 java/Tak.class
 rust/tak
 uxntal/tak.rom*
-dlang/tak
-dlang/tak.o
