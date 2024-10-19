@@ -32,6 +32,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 skip_default = [
+    "arturo",   # Takes way too long
     "callisto", # Harder to set up, requires building compiler and installing stdlib
     "chicken",  # May require modifying shell script to account for differently named compiler
     "factor",   # May require modifying shell script to account for differently named interpreter
