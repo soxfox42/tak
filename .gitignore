@@ -12,3 +12,5 @@ haskell/tak.o
 java/Tak.class
 rust/tak
 uxntal/tak.rom*
+zig/tak
+zig/tak.o
