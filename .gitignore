@@ -1,5 +1,9 @@
 c/tak
 callisto/tak
+csharp/bin
+csharp/obj
+csharp/tak
+csharp/tak.pdb
 cython/build
 cython/tak.c
 cython/tak.cpython*

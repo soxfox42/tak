@@ -20,6 +20,7 @@ Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
 c           | 00:00.993648 | Apple clang version 16.0.0 (clang-1600.0.26.3)
 rust        | 00:00.994078 | rustc 1.81.0 (eeb90cda1 2024-09-04)
 zig         | 00:00.994234 | 0.13.0
+csharp      | 00:00.998090 | 8.0.108
 java        | 00:01.061346 | openjdk 21.0.3 2024-04-16 LTS
 go          | 00:01.148092 | go version go1.23.2 darwin/arm64
 dlang       | 00:01.394184 | LDC - the LLVM D compiler (1.39.0)
