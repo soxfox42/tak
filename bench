@@ -20,9 +20,12 @@ parser.add_argument(
     help="The number of times to run each implementation",
 )
 parser.add_argument(
-    "-i", "--impl",
-    action="append", default=[],
+    "-i", "--impls",
     help="The implementations to run",
+)
+parser.add_argument(
+    "-e", "--exclude",
+    help="The implementations to skip running",
 )
 parser.add_argument(
     "-a", "--all",
@@ -42,30 +45,47 @@ ERROR = "\x1B[31m"
 DIM = "\x1B[90m"
 RESET = "\x1B[0m"
 
-for impl in args.impl:
-    path = Path.cwd() / impl
-    if not path.exists():
-        sys.exit(f"Implementation {impl} not found")
+if args.impls and args.exclude:
+    sys.exit(
+        ERROR
+        + "Error: --impls and --exclude cannot be used together"
+        + RESET
+    )
+
+impls = []
+exclude = args.exclude.split(",") if args.exclude else []
+
+if args.impls:
+    # Explicitly specified
+    for impl in args.impls.split(","):
+        path = Path.cwd() / impl
+        run = path / "run.sh"
+        # Error if the user gave a bad impl name
+        if not (path.exists() and run.exists()):
+            sys.exit(f"{ERROR}Error: Implementation {impl} not found{RESET}")
+        impls.append(path)
+else:
+    for path in Path.cwd().iterdir():
+        if not path.is_dir():
+            continue
+        run = path / "run.sh"
+        if not run.exists():
+            continue
+        # Skip the tricky ones if -a is not passed
+        if not args.all and path.name in skip_default:
+            continue
+        # Skip the ones the user asked to skip - even when -a is used
+        if path.name in exclude:
+            continue
+        impls.append(path)
 
 results = []
 
-for path in Path.cwd().iterdir():
-    if not path.is_dir():
-        continue
-
+for path in impls:
     name = path.name
     version = path / "version.sh"
     build = path / "build.sh"
     run = path / "run.sh"
-
-    if not run.exists():
-        continue
-    # If implementations were explicitly specified, only run those.
-    if args.impl and name not in args.impl:
-        continue
-    # If -a was not specified, skip trickier implementations
-    if not args.impl and not args.all and name in skip_default:
-        continue
 
     print(f"{name}: ", end="", flush=True)
 
@@ -93,7 +113,7 @@ for path in Path.cwd().iterdir():
             stderr=subprocess.DEVNULL
         )
         if result.returncode != 0:
-            print(f"\n{ERROR}Failed to build {name}{RESET}")
+            print(f"\n{ERROR}Error: Failed to build {name}{RESET}")
             continue
         print(", ", end="")
 
@@ -110,7 +130,7 @@ for path in Path.cwd().iterdir():
             stderr=subprocess.DEVNULL,
         )
         if result.returncode != 0:
-            print(f"\n{ERROR}Failed to run {name}{RESET}")
+            print(f"\n{ERROR}Error: Failed to run {name}{RESET}")
             ok = False
             break
         end = datetime.now()
