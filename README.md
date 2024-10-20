@@ -34,6 +34,7 @@ uxntal      | 00:15.843453 | Uxnemu - Varvara Emulator(GUI): 25 Aug 2024.
 lua         | 00:16.901724 | Lua 5.4.7
 chicken     | 00:19.593212 | 5.4.0
 quickjs     | 00:25.530629 | QuickJS version 2024-01-13
+wren        | 00:27.523338 | wren 0.4.0
 ruby        | 00:29.660727 | ruby 3.3.5 (2024-09-03 revision ef084cc8f4) [arm64-darwin24]
 python      | 00:32.869780 | Python 3.12.2
 arturo      | 04:23.373082 | arturo v/0.9.83
@@ -49,6 +50,7 @@ The general requirements for adding a new language:
 - Create a new folder for the language.
 - Add the implementation - usually named `tak.foo`, where `foo` is the relevant extension.
 - Add `run.sh`, which passes three arguments `$1`, `$2` and `$3` to the program.
+- Add `version.sh`, which should output the current version of the language. This should come directly from the interpreter/compiler, and be a single line of output. You can use common shell tools to process the output down to one line if necessary.
 - For compiled languages, add `build.sh` to generate the compiled output.
 - The program must read the values of x, y, and z from `argv`.
 - The program must produce some sort of output, as this makes verification and debugging easier.

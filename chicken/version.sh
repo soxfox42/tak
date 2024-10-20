@@ -1,5 +1,5 @@
 #!/bin/bash
-if command -v chicken-csc; then
+if command -v chicken-csc > /dev/null; then
   chicken=chicken-csc
 else
   chicken=csc

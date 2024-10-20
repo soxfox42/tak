@@ -143,6 +143,10 @@ for path in impls:
 
     print()
 
+if not results:
+    print("No results")
+    sys.exit()
+
 print("===")
 
 name_width = max(len(result[0]) for result in results)
