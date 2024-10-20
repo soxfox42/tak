@@ -79,6 +79,8 @@ else:
             continue
         impls.append(path)
 
+impls.sort()
+
 results = []
 
 for path in impls:
@@ -143,7 +145,8 @@ for path in impls:
 
 print("===")
 
+name_width = max(len(result[0]) for result in results)
 results.sort(key=itemgetter(2))
 for name, version, time in results:
     trimmed = str(time).split(":", 1)[1]
-    print(f"{name:11} | {trimmed} {DIM}| {version}{RESET}")
+    print(f"{name:{name_width}} | {trimmed} {DIM}| {version}{RESET}")
