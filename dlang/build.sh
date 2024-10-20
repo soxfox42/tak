@@ -1,2 +1,2 @@
 #!/bin/bash
-ldc tak.d -of=tak
+ldc2 tak.d -of=tak

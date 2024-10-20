@@ -4,4 +4,4 @@ if command -v chicken-csc; then
 else
   chicken=csc
 fi
-$chicken tak.scm
+$chicken -release

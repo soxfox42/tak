@@ -4,4 +4,4 @@ if command -v factor-vm; then
 else
   factor=factor
 fi
-$factor tak.factor $3 $2 $1
+$factor --version | head -n 1

@@ -17,25 +17,26 @@ def tak(x, y, z):
 
 Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
 ```
-c           | 00:00.941744
-rust        | 00:00.943518
-zig         | 00:00.964244
-java        | 00:01.047898
-go          | 00:01.141506
-dlang       | 00:01.387809
-luajit      | 00:03.180875
-haskell     | 00:03.171809
-cython      | 00:04.057390
-nodejs      | 00:04.170309
-callisto    | 00:05.401088
-factor      | 00:05.856998
-gforth      | 00:13.388287
-uxntal      | 00:15.797669
-lua         | 00:16.849700
-quickjs     | 00:25.239628
-python      | 00:32.529359
-ruby        | 00:34.238729
-arturo      | 04:21.561082
+c           | 00:00.993648 | Apple clang version 16.0.0 (clang-1600.0.26.3)
+rust        | 00:00.994078 | rustc 1.81.0 (eeb90cda1 2024-09-04)
+zig         | 00:00.994234 | 0.13.0
+java        | 00:01.061346 | openjdk 21.0.3 2024-04-16 LTS
+go          | 00:01.148092 | go version go1.23.2 darwin/arm64
+dlang       | 00:01.394184 | LDC - the LLVM D compiler (1.39.0)
+haskell     | 00:02.950726 | The Glorious Glasgow Haskell Compilation System, version 9.8.2
+luajit      | 00:03.192948 | LuaJIT 2.1.1727870382
+cython      | 00:04.056156 | Cython version 3.0.11
+nodejs      | 00:04.220198 | v22.8.0
+factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05, Sep 11 2024 14:22:41)
+callisto    | 00:11.404010 | The Glorious Callisto Compilation System Beta 0.11.0
+gforth      | 00:13.504027 | gforth 0.7.3
+uxntal      | 00:15.843453 | Uxnemu - Varvara Emulator(GUI): 25 Aug 2024.
+lua         | 00:16.901724 | Lua 5.4.7
+chicken     | 00:19.593212 | 5.4.0
+quickjs     | 00:25.530629 | QuickJS version 2024-01-13
+ruby        | 00:29.660727 | ruby 3.3.5 (2024-09-03 revision ef084cc8f4) [arm64-darwin24]
+python      | 00:32.869780 | Python 3.12.2
+arturo      | 04:23.373082 | arturo v/0.9.83
 ```
 
 Note that the Factor implementation was run via Rosetta 2 translation.
