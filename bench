@@ -37,6 +37,7 @@ args = parser.parse_args()
 skip_default = [
     "arturo",    # Takes way too long
     "callisto",  # Requires building compiler and installing stdlib
+    "oak",       # Takes way too long
     "uxntal",    # Requires building assembler and emulator
 ]
 
