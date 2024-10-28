@@ -32,6 +32,15 @@ parser.add_argument(
     action="store_true",
     help="Run all implementations, including skipped-by-default ones",
 )
+parser.add_argument(
+    "-t", "--timeout",
+    type=int, default=180,
+    help=(
+        "The maximum total time to run each implementation for. "
+        "Each implementation will be run at least once in full. "
+        "Setting this to 0 will disable timeouts."
+    )
+)
 args = parser.parse_args()
 
 skip_default = [
@@ -123,6 +132,7 @@ for path in impls:
     print("running", end="", flush=True)
 
     total = dt.timedelta()
+    runs = 0
     ok = True
     for i in range(args.runs):
         start = datetime.now()
@@ -138,9 +148,19 @@ for path in impls:
             break
         end = datetime.now()
         total += end - start
+        runs += 1
+
+        average = total / runs
+        if (
+            i < args.runs - 1
+            and args.timeout > 0
+            and (total + average).total_seconds() > args.timeout
+        ):
+            print(f", timeout after {runs} run(s)", end="", flush=True)
+            break
     if not ok:
         continue
-    results.append((path.name, version_output, total / args.runs))
+    results.append((path.name, version_output, total / runs))
 
     print()
 
