@@ -31,8 +31,8 @@ luajit      | 00:03.192948 | LuaJIT 2.1.1727870382
 cython      | 00:04.056156 | Cython version 3.0.11
 nodejs      | 00:04.220198 | v22.8.0
 clojure     | 00:04.826972 | Clojure CLI version 1.12.0.1479
+callisto    | 00:05.339480 | The Glorious Callisto Compilation System Beta 0.11.1
 factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05, Sep 11 2024 14:22:41)
-callisto    | 00:11.404010 | The Glorious Callisto Compilation System Beta 0.11.0
 gforth      | 00:13.504027 | gforth 0.7.3
 uxntal      | 00:15.843453 | Uxnemu - Varvara Emulator(GUI): 25 Aug 2024.
 lua         | 00:16.901724 | Lua 5.4.7
