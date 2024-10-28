@@ -26,6 +26,8 @@ if missing_languages:
     print("Missing languages:")
     for language in sorted(missing_languages):
         print(language)
+else:
+    print("Everything looks good!")
 
 if extra_languages:
     print("Extra languages:")

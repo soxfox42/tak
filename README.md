@@ -25,10 +25,12 @@ csharp      | 00:00.998090 | 8.0.108
 java        | 00:01.061346 | openjdk 21.0.3 2024-04-16 LTS
 go          | 00:01.148092 | go version go1.23.2 darwin/arm64
 dlang       | 00:01.394184 | LDC - the LLVM D compiler (1.39.0)
+fortran     | 00:02.268873 | GNU Fortran (Homebrew GCC 14.2.0_1) 14.2.0
 haskell     | 00:02.950726 | The Glorious Glasgow Haskell Compilation System, version 9.8.2
 luajit      | 00:03.192948 | LuaJIT 2.1.1727870382
 cython      | 00:04.056156 | Cython version 3.0.11
 nodejs      | 00:04.220198 | v22.8.0
+clojure     | 00:04.826972 | Clojure CLI version 1.12.0.1479
 factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05, Sep 11 2024 14:22:41)
 callisto    | 00:11.404010 | The Glorious Callisto Compilation System Beta 0.11.0
 gforth      | 00:13.504027 | gforth 0.7.3
@@ -39,7 +41,9 @@ quickjs     | 00:25.530629 | QuickJS version 2024-01-13
 wren        | 00:27.523338 | wren 0.4.0
 ruby        | 00:29.660727 | ruby 3.3.5 (2024-09-03 revision ef084cc8f4) [arm64-darwin24]
 python      | 00:32.869780 | Python 3.12.2
+lbforth     | 03:03.276468 | https://gist.github.com/lbruder/10007431 (RSTACK_SIZE 100)
 arturo      | 04:23.373082 | arturo v/0.9.83
+oak         | 08:48.389520 | Oak v0.3
 ```
 
 Note that the Factor implementation was run via Rosetta 2 translation.
