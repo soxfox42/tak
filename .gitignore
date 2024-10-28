@@ -9,11 +9,13 @@ cython/tak.c
 cython/tak.cpython*
 dlang/tak
 dlang/tak.o
+fortran/tak
 go/tak
 haskell/tak
 haskell/tak.hi
 haskell/tak.o
 java/Tak.class
+lbforth/lbforth
 rust/tak
 uxntal/tak.rom*
 zig/tak
