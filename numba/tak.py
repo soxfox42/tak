@@ -1,6 +1,8 @@
+from numba import jit
 import sys
 
 
+@jit
 def tak(x, y, z):
     if y < x:
         return tak(

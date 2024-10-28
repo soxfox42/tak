@@ -21,10 +21,12 @@ Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
 c           | 00:00.993648 | Apple clang version 16.0.0 (clang-1600.0.26.3)
 rust        | 00:00.994078 | rustc 1.81.0 (eeb90cda1 2024-09-04)
 zig         | 00:00.994234 | 0.13.0
+codon       | 00:00.996964 | 0.17.0
 csharp      | 00:00.998090 | 8.0.108
 java        | 00:01.061346 | openjdk 21.0.3 2024-04-16 LTS
 go          | 00:01.148092 | go version go1.23.2 darwin/arm64
 dlang       | 00:01.394184 | LDC - the LLVM D compiler (1.39.0)
+numba       | 00:01.999862 | Python 3.12.2, Numba Version: 0.60.0
 fortran     | 00:02.268873 | GNU Fortran (Homebrew GCC 14.2.0_1) 14.2.0
 haskell     | 00:02.950726 | The Glorious Glasgow Haskell Compilation System, version 9.8.2
 luajit      | 00:03.192948 | LuaJIT 2.1.1727870382
@@ -34,6 +36,7 @@ clojure     | 00:04.826972 | Clojure CLI version 1.12.0.1479
 callisto    | 00:05.339480 | The Glorious Callisto Compilation System Beta 0.11.1
 factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05, Sep 11 2024 14:22:41)
 gforth      | 00:13.504027 | gforth 0.7.3
+pypy        | 00:14.293683 | [PyPy 7.3.17 with GCC Apple LLVM 15.0.0 (clang-1500.3.9.4)]
 uxntal      | 00:15.843453 | Uxnemu - Varvara Emulator(GUI): 25 Aug 2024.
 lua         | 00:16.901724 | Lua 5.4.7
 chicken     | 00:19.593212 | 5.4.0

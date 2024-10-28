@@ -44,9 +44,10 @@ parser.add_argument(
 args = parser.parse_args()
 
 skip_default = [
-    "arturo",    # Takes way too long
+    "arturo",    # Very slow
     "callisto",  # Requires building compiler and installing stdlib
-    "oak",       # Takes way too long
+    "lbforth",   # Very slow
+    "oak",       # Very slow
     "uxntal",    # Requires building assembler and emulator
 ]
 
