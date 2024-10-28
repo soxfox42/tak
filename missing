@@ -1,0 +1,33 @@
+#!/usr/bin/env python3
+
+from pathlib import Path
+
+with open("README.md") as readme:
+    lines = [line.strip() for line in readme]
+
+start = lines.index("<!-- *results* -->") + 2
+end = lines.index("```", start)
+
+language_lines = lines[start:end]
+benched_languages = [line.split("|", 1)[0].strip() for line in language_lines]
+
+all_languages = []
+
+for path in Path.cwd().iterdir():
+    run = path / "run.sh"
+    if not run.exists():
+        continue
+    all_languages.append(path.name)
+
+missing_languages = set(all_languages) - set(benched_languages)
+extra_languages = set(benched_languages) - set(all_languages)
+
+if missing_languages:
+    print("Missing languages:")
+    for language in sorted(missing_languages):
+        print(language)
+
+if extra_languages:
+    print("Extra languages:")
+    for language in sorted(extra_languages):
+        print(language)

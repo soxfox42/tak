@@ -16,6 +16,7 @@ def tak(x, y, z):
 ```
 
 Current results - x = 48, y = 20, z = 12 - M1 MacBook Pro:
+<!-- *results* -->
 ```
 c           | 00:00.993648 | Apple clang version 16.0.0 (clang-1600.0.26.3)
 rust        | 00:00.994078 | rustc 1.81.0 (eeb90cda1 2024-09-04)
