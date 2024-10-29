@@ -35,6 +35,7 @@ nodejs      | 00:04.220198 | v22.8.0
 clojure     | 00:04.826972 | Clojure CLI version 1.12.0.1479
 callisto    | 00:05.339480 | The Glorious Callisto Compilation System Beta 0.11.1
 factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05, Sep 11 2024 14:22:41)
+ocaml       | 00:10.156417 | 5.2.0
 gforth      | 00:13.504027 | gforth 0.7.3
 pypy        | 00:14.293683 | [PyPy 7.3.17 with GCC Apple LLVM 15.0.0 (clang-1500.3.9.4)]
 uxntal      | 00:15.843453 | Uxnemu - Varvara Emulator(GUI): 25 Aug 2024.
