@@ -32,6 +32,8 @@ ocaml/tak.cmi
 ocaml/tak.cmo
 ocaml/tak.exe
 
+odin/tak
+
 rust/tak
 
 uxntal/tak.rom*

@@ -1,0 +1,2 @@
+#!/bin/bash
+odin version

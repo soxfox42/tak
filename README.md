@@ -23,6 +23,7 @@ rust        | 00:00.994078 | rustc 1.81.0 (eeb90cda1 2024-09-04)
 zig         | 00:00.994234 | 0.13.0
 codon       | 00:00.996964 | 0.17.0
 csharp      | 00:00.998090 | 8.0.108
+odin        | 00:01.002665 | odin version dev-2025-01:2aae4cfd4
 java        | 00:01.061346 | openjdk 21.0.3 2024-04-16 LTS
 go          | 00:01.148092 | go version go1.23.2 darwin/arm64
 dlang       | 00:01.394184 | LDC - the LLVM D compiler (1.39.0)
