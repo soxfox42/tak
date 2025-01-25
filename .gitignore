@@ -1,26 +1,16 @@
-c/tak
-
-callisto/tak
-
-codon/tak
+# Default to ignoring "tak"
+*/tak
 
 csharp/bin
 csharp/obj
-csharp/tak
 csharp/tak.pdb
 
 cython/build
 cython/tak.c
 cython/tak.cpython*
 
-dlang/tak
 dlang/tak.o
 
-fortran/tak
-
-go/tak
-
-haskell/tak
 haskell/tak.hi
 haskell/tak.o
 
@@ -32,11 +22,6 @@ ocaml/tak.cmi
 ocaml/tak.cmo
 ocaml/tak.exe
 
-odin/tak
-
-rust/tak
-
 uxntal/tak.rom*
 
-zig/tak
 zig/tak.o
