@@ -54,6 +54,7 @@ perl        | 02:30.612512 | v5.34.1
 lbforth     | 03:03.276468 | https://gist.github.com/lbruder/10007431 (RSTACK_SIZE 100)
 arturo      | 04:23.373082 | arturo v/0.9.83
 raku        | 04:38.605524 | Rakudo™ v2024.12.
+r           | 05:49.101054 | R version 4.5.0 (2025-04-11) -- "How About a Twenty-Six"
 oak         | 08:48.389520 | Oak v0.3
 ```
 
