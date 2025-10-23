@@ -1,0 +1,146 @@
+#include <stdio.h>
+
+static unsigned int console_vector;
+static unsigned char ram[0x10000], dev[0x100], ptr[2], stk[2][0x100];
+
+static void
+system_print(char *name, int r)
+{
+	unsigned char i;
+	fprintf(stderr, "%s ", name);
+	for(i = ptr[r] - 8; i != ptr[r]; i++)
+		fprintf(stderr, "%02x%c", stk[r][i], i == 0xff ? '|' : ' ');
+	fprintf(stderr, "<%02x\n", ptr[r]);
+}
+
+static unsigned char
+emu_dei(const unsigned char port)
+{
+	return dev[port];
+}
+
+static void
+emu_deo(const unsigned char port, const unsigned char value)
+{
+	dev[port] = value;
+	switch(port) {
+	case 0x0e: system_print("WST", 0), system_print("RST", 1); break;
+	case 0x11: console_vector = dev[0x10] << 8 | value; return;
+	case 0x18: fputc(value, stdout); return;
+	case 0x19: fputc(value, stderr); return;
+	}
+}
+
+#define REM ptr[_r] -= 1 + _2;
+#define DEC(m) stk[m][--ptr[m]]
+#define INC(m) stk[m][ptr[m]++]
+#define IMM(r) { r = ram[pc++] << 8, r |= ram[pc++]; }
+#define MOV(x) { if(_2) pc = x; else pc += (signed char)x; }
+#define PO1(o) o = DEC(_r);
+#define PO2(o) { PO1(o) o |= DEC(_r) << 8; }
+#define POx(o) if(_2) PO2(o) else PO1(o)
+#define GOT(o) if(_2) PO1(o[1]) PO1(o[0])
+#define DEO(o,r) emu_deo(o, r[0]); if(_2) emu_deo(o + 1, r[1]);
+#define POK(o,r,m) ram[o] = r[0]; if(_2) ram[(o + 1) & m] = r[1];
+#define RP1(i) INC(!_r) = i;
+#define PU1(i) INC(_r) = i;
+#define PUx(i) if(_2) { c = (i); PU1(c >> 8) PU1(c) } else PU1(i)
+#define PUT(i) PU1(i[0]) if(_2) PU1(i[1])
+#define DEI(i,r) r[0] = emu_dei(i); if(_2) r[1] = emu_dei(i + 1); PUT(r)
+#define PEK(i,r,m) r[0] = ram[i]; if(_2) r[1] = ram[(i + 1) & m]; PUT(r)
+
+#define NEXT if(--cycles) goto step; else return 0;
+#define OPC(opc, A, B) {\
+	case 0x00|opc: {const int _2=0,_r=0;A B} NEXT\
+	case 0x20|opc: {const int _2=1,_r=0;A B} NEXT\
+	case 0x40|opc: {const int _2=0,_r=1;A B} NEXT\
+	case 0x60|opc: {const int _2=1,_r=1;A B} NEXT\
+	case 0x80|opc: {const int _2=0,_r=0;int k=ptr[0];A ptr[0]=k;B} NEXT\
+	case 0xa0|opc: {const int _2=1,_r=0;int k=ptr[0];A ptr[0]=k;B} NEXT\
+	case 0xc0|opc: {const int _2=0,_r=1;int k=ptr[1];A ptr[1]=k;B} NEXT\
+	case 0xe0|opc: {const int _2=1,_r=1;int k=ptr[1];A ptr[1]=k;B} NEXT }
+
+static unsigned int
+uxn_eval(unsigned short pc)
+{
+	unsigned int a, b, c, x[2], y[2], z[2], cycles = 0x80000000;
+step:
+	switch(ram[pc++]) {
+	/* BRK */ case 0x00: return 1;
+	/* JCI */ case 0x20: if(DEC(0)) { IMM(c) pc += c; } else pc += 2; NEXT
+	/* JMI */ case 0x40: IMM(c) pc += c; NEXT
+	/* JSI */ case 0x60: IMM(c) INC(1) = pc >> 8, INC(1) = pc, pc += c; NEXT
+	/* LI2 */ case 0xa0: INC(0) = ram[pc++]; /* fall-through */
+	/* LIT */ case 0x80: INC(0) = ram[pc++]; NEXT
+	/* L2r */ case 0xe0: INC(1) = ram[pc++]; /* fall-through */
+	/* LIr */ case 0xc0: INC(1) = ram[pc++]; NEXT
+	/* INC */ OPC(0x01,POx(a),PUx(a + 1))
+	/* POP */ OPC(0x02,REM,{})
+	/* NIP */ OPC(0x03,GOT(x) REM,PUT(x))
+	/* SWP */ OPC(0x04,GOT(x) GOT(y),PUT(x) PUT(y))
+	/* ROT */ OPC(0x05,GOT(x) GOT(y) GOT(z),PUT(y) PUT(x) PUT(z))
+	/* DUP */ OPC(0x06,GOT(x),PUT(x) PUT(x))
+	/* OVR */ OPC(0x07,GOT(x) GOT(y),PUT(y) PUT(x) PUT(y))
+	/* EQU */ OPC(0x08,POx(a) POx(b),PU1(b == a))
+	/* NEQ */ OPC(0x09,POx(a) POx(b),PU1(b != a))
+	/* GTH */ OPC(0x0a,POx(a) POx(b),PU1(b > a))
+	/* LTH */ OPC(0x0b,POx(a) POx(b),PU1(b < a))
+	/* JMP */ OPC(0x0c,POx(a),MOV(a))
+	/* JCN */ OPC(0x0d,POx(a) PO1(b),if(b) MOV(a))
+	/* JSR */ OPC(0x0e,POx(a),RP1(pc >> 8) RP1(pc) MOV(a))
+	/* STH */ OPC(0x0f,GOT(x),RP1(x[0]) if(_2) RP1(x[1]))
+	/* LDZ */ OPC(0x10,PO1(a),PEK(a, x, 0xff))
+	/* STZ */ OPC(0x11,PO1(a) GOT(y),POK(a, y, 0xff))
+	/* LDR */ OPC(0x12,PO1(a),PEK(pc + (signed char)a, x, 0xffff))
+	/* STR */ OPC(0x13,PO1(a) GOT(y),POK(pc + (signed char)a, y, 0xffff))
+	/* LDA */ OPC(0x14,PO2(a),PEK(a, x, 0xffff))
+	/* STA */ OPC(0x15,PO2(a) GOT(y),POK(a, y, 0xffff))
+	/* DEI */ OPC(0x16,PO1(a),DEI(a, x))
+	/* DEO */ OPC(0x17,PO1(a) GOT(y),DEO(a, y))
+	/* ADD */ OPC(0x18,POx(a) POx(b),PUx(b + a))
+	/* SUB */ OPC(0x19,POx(a) POx(b),PUx(b - a))
+	/* MUL */ OPC(0x1a,POx(a) POx(b),PUx(b * a))
+	/* DIV */ OPC(0x1b,POx(a) POx(b),PUx(a ? b / a : 0))
+	/* AND */ OPC(0x1c,POx(a) POx(b),PUx(b & a))
+	/* ORA */ OPC(0x1d,POx(a) POx(b),PUx(b | a))
+	/* EOR */ OPC(0x1e,POx(a) POx(b),PUx(b ^ a))
+	/* SFT */ OPC(0x1f,PO1(a) POx(b),PUx(b >> (a & 0xf) << (a >> 4)))
+	}
+	return 0;
+}
+
+static void
+console_input(int c, unsigned int type)
+{
+	dev[0x12] = c, dev[0x17] = type;
+	if(console_vector && !dev[0x0f])
+		uxn_eval(console_vector);
+}
+
+int
+main(int argc, char **argv)
+{
+	FILE *f;
+	if(argc < 2)
+		return fprintf(stdout, "usage: %s file.rom [args..]\n", argv[0]);
+	else if(!(f = fopen(argv[1], "rb")))
+		return fprintf(stderr, "%s: %s not found.\n", argv[0], argv[1]);
+	fread(&ram[0x100], 0xff00, 1, f), fclose(f);
+	dev[0x17] = argc > 2;
+	if(uxn_eval(0x100) && console_vector) {
+		int i = 2;
+		for(; i < argc; i++) {
+			char c, *p = argv[i];
+			while(!dev[0x0f] && (c = *p++))
+				console_input(c, 2);
+			console_input(0, 3 + (i == argc - 1));
+		}
+		while(!dev[0x0f]) {
+			char c = fgetc(stdin);
+			if(feof(stdin)) break;
+			console_input(c, 1);
+		}
+		console_input(0, 4);
+	}
+	return dev[0x0f] & 0x7f;
+}
