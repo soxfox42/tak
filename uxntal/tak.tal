@@ -1,7 +1,6 @@
 ( uxnmin tak.rom z y x )
 
 |10 @Console/vector $2 &read $5 &type $1 &write $1 &error $1
-
 |100
 
 @on-reset ( -> )
@@ -16,10 +15,9 @@
 	#800f DEO
 	BRK
 
-@tak ( z y x -> res )
+@tak ( z y x -- res )
 	LTHk ?{ POP2 JMP2r }
 	ROT ROTk ROTk
 	( x-1 ) #01 SUB tak STH
 	( y-1 ) #01 SUB tak STH
 	( z-1 ) #01 SUB tak STHr STHr !tak
-
