@@ -11,9 +11,7 @@
 	.Console/type DEI #02 NEQk ?{
 		POP2 #0a MUL .Console/read DEI #30 SUB ADD BRK }
 	INC NEQk ?{ NEQ BRK }
-	POP2 tak #010e DEO
-	#800f DEO
-	BRK
+	POP2 tak #0180 #0e DEO2 BRK
 
 @tak ( z y x -- res )
 	LTHk ?{ POP2 JMP2r }
