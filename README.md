@@ -1,5 +1,10 @@
 # Tak
 
+> [!NOTE]
+> This project is mostly idle. I'm not adding any more implementations of my own for the time being. It's also not a very good benchmark, since all it really does is test an extremely recursive function.
+>
+> Feel free to submit PRs though, I'll get to them when I can, and update results accordingly :)
+
 [Tak](https://en.wikipedia.org/wiki/Tak_(function)) is a simple benchmark function. This repo contains some scripts I wrote to test various language implementations.
 
 It is defined as follows:
