@@ -34,6 +34,7 @@ odin        | 00:01.002665 | odin version dev-2025-01:2aae4cfd4
 java        | 00:01.061346 | openjdk 21.0.3 2024-04-16 LTS
 go          | 00:01.148092 | go version go1.23.2 darwin/arm64
 dlang       | 00:01.394184 | LDC - the LLVM D compiler (1.39.0)
+clojure     | 00:01.658746 | Clojure CLI version 1.12.3.1577
 numba       | 00:01.999862 | Python 3.12.2, Numba Version: 0.60.0
 fortran     | 00:02.268873 | GNU Fortran (Homebrew GCC 14.2.0_1) 14.2.0
 bun         | 00:02.873798 | 1.2.0
@@ -42,7 +43,6 @@ luajit      | 00:03.192948 | LuaJIT 2.1.1727870382
 deno        | 00:04.046599 | deno 2.1.7
 cython      | 00:04.056156 | Cython version 3.0.11
 nodejs      | 00:04.153770 | v23.3.0
-clojure     | 00:04.826972 | Clojure CLI version 1.12.0.1479
 callisto    | 00:05.339480 | The Glorious Callisto Compilation System Beta 0.11.1
 factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05, Sep 11 2024 14:22:41)
 ocaml       | 00:10.156417 | 5.2.0
