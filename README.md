@@ -43,7 +43,7 @@ factor      | 00:06.030762 | Factor 0.100 x86.64 (2281, heads/master-80a4633f05,
 ocaml       | 00:10.156417 | 5.2.0
 gforth      | 00:13.504027 | gforth 0.7.3
 pypy        | 00:14.293683 | [PyPy 7.3.17 with GCC Apple LLVM 15.0.0 (clang-1500.3.9.4)]
-uxntal      | 00:15.843453 | Uxnemu - Varvara Emulator(GUI): 25 Aug 2024.
+uxntal      | 00:14.654880 | uxnmin.c
 lua         | 00:16.901724 | Lua 5.4.7
 chicken     | 00:19.593212 | 5.4.0
 quickjs     | 00:25.530629 | QuickJS version 2024-01-13

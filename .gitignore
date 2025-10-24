@@ -22,6 +22,7 @@ ocaml/tak.cmi
 ocaml/tak.cmo
 ocaml/tak.exe
 
+uxntal/uxnmin
 uxntal/tak.rom*
 
 zig/tak.o

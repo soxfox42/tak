@@ -1,2 +1,2 @@
 #!/bin/bash
-uxnemu -v
+echo uxnmin.c
