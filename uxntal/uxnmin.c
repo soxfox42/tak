@@ -49,31 +49,30 @@ emu_deo(const unsigned char port, const unsigned char value)
 #define DEI(i,r) r[0] = emu_dei(i); if(_2) r[1] = emu_dei(i + 1); PUT(r)
 #define PEK(i,r,m) r[0] = ram[i]; if(_2) r[1] = ram[(i + 1) & m]; PUT(r)
 
-#define NEXT if(--cycles) goto step; else return 0;
 #define OPC(opc, A, B) {\
-	case 0x00|opc: {const int _2=0,_r=0;A B} NEXT\
-	case 0x20|opc: {const int _2=1,_r=0;A B} NEXT\
-	case 0x40|opc: {const int _2=0,_r=1;A B} NEXT\
-	case 0x60|opc: {const int _2=1,_r=1;A B} NEXT\
-	case 0x80|opc: {const int _2=0,_r=0;int k=ptr[0];A ptr[0]=k;B} NEXT\
-	case 0xa0|opc: {const int _2=1,_r=0;int k=ptr[0];A ptr[0]=k;B} NEXT\
-	case 0xc0|opc: {const int _2=0,_r=1;int k=ptr[1];A ptr[1]=k;B} NEXT\
-	case 0xe0|opc: {const int _2=1,_r=1;int k=ptr[1];A ptr[1]=k;B} NEXT }
+	case 0x00|opc: {const int _2=0,_r=0;A B} goto step;\
+	case 0x20|opc: {const int _2=1,_r=0;A B} goto step;\
+	case 0x40|opc: {const int _2=0,_r=1;A B} goto step;\
+	case 0x60|opc: {const int _2=1,_r=1;A B} goto step;\
+	case 0x80|opc: {const int _2=0,_r=0;int k=ptr[0];A ptr[0]=k;B} goto step;\
+	case 0xa0|opc: {const int _2=1,_r=0;int k=ptr[0];A ptr[0]=k;B} goto step;\
+	case 0xc0|opc: {const int _2=0,_r=1;int k=ptr[1];A ptr[1]=k;B} goto step;\
+	case 0xe0|opc: {const int _2=1,_r=1;int k=ptr[1];A ptr[1]=k;B} goto step; }
 
 static unsigned int
 uxn_eval(unsigned short pc)
 {
-	unsigned int a, b, c, x[2], y[2], z[2], cycles = 0x80000000;
+	unsigned int a, b, c, x[2], y[2], z[2];
 step:
 	switch(ram[pc++]) {
 	/* BRK */ case 0x00: return 1;
-	/* JCI */ case 0x20: if(DEC(0)) { IMM(c) pc += c; } else pc += 2; NEXT
-	/* JMI */ case 0x40: IMM(c) pc += c; NEXT
-	/* JSI */ case 0x60: IMM(c) INC(1) = pc >> 8, INC(1) = pc, pc += c; NEXT
+	/* JCI */ case 0x20: if(DEC(0)) { IMM(c) pc += c; } else pc += 2; goto step;
+	/* JMI */ case 0x40: IMM(c) pc += c; goto step;
+	/* JSI */ case 0x60: IMM(c) INC(1) = pc >> 8, INC(1) = pc, pc += c; goto step;
 	/* LI2 */ case 0xa0: INC(0) = ram[pc++]; /* fall-through */
-	/* LIT */ case 0x80: INC(0) = ram[pc++]; NEXT
+	/* LIT */ case 0x80: INC(0) = ram[pc++]; goto step;
 	/* L2r */ case 0xe0: INC(1) = ram[pc++]; /* fall-through */
-	/* LIr */ case 0xc0: INC(1) = ram[pc++]; NEXT
+	/* LIr */ case 0xc0: INC(1) = ram[pc++]; goto step;
 	/* INC */ OPC(0x01,POx(a),PUx(a + 1))
 	/* POP */ OPC(0x02,REM,{})
 	/* NIP */ OPC(0x03,GOT(x) REM,PUT(x))
